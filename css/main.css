@@ -1,0 +1,19 @@
+
+body {
+    position: relative;
+    margin: 1em auto 4em auto;
+    width: 960px;
+    font-family: "PT Serif", serif;
+}
+
+h1, h2 {
+    font-family: "PT Sans", sans-serif;
+    text-rendering: optimizeLegibility;
+}
+
+.demo {
+    position: relative;
+    margin: 1em auto 4em auto;
+    width: 900px;
+    height: 500px;
+}
