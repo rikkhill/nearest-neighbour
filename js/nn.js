@@ -53,11 +53,34 @@ function NaiveSearch(points) {
 }
 
 function euclideanSpace(parent) {
-    let width = parent.offsetWidth;
-    let height = parent.offsetHeight;
+    const width = parent.offsetWidth;
+    const height = parent.offsetHeight;
 
-    let svg = d3.select(parent).append("svg")
+    const svg = d3.select(parent).append("svg")
         .attr("width", width)
         .attr("height", height);
 
+    const xAxis = d3.scaleLinear().domain([-10, 10]).range(0, width);
+    const yAxis = d3.scaleLinear().domain([-10, 10]).range(0, height);
+
+    const populate = function(points) {
+
+        this.svg.selectAll(".point")
+            .data(points)
+            .enter()
+            .append("circle")
+            .classed("point", true)
+            .attr("cx", function(d) { return this.xAxis(d[0]); })
+            .attr("cy", function(d) { return this.yAxis(d[1]); })
+            .attr("r", "2px");
+    }
+
+    return {
+        width: width,
+        height: height,
+        svg: svg,
+        xAxis: xAxis,
+        yAxis: yAxis,
+        populate: populate
+    }
 }
