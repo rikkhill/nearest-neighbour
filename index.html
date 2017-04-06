@@ -9,9 +9,29 @@
 <body>
 <h1>Nearest Neighbour Search</h1>
 <p></p>
-<div id="naive" class="demo"></div>
+<div id="triangle" class="demo"></div>
 <script>
-    euclideanSpace(document.getElementById("naive"));
+    let tri = euclideanSpace(document.getElementById("triangle"));
+
+    let points = [
+        [5, 4],
+        [4, 5],
+        [6, 4.5]
+    ];
+
+    tri.svg.selectAll(".point")
+        .data(points)
+        .enter()
+        .append("circle")
+        .attr("class", "point")
+        .attr("cx", function(d) { return tri.xScale(d[0]) })
+        .attr("cy", function(d) { return tri.yScale(d[1]) })
+        .attr("r", 5)
+        .call(d3.drag()
+            .on("drag", dragPoint));
+
+
+
 </script>
 </body>
 </html>

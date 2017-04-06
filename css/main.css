@@ -17,3 +17,12 @@ h1, h2 {
     width: 900px;
     height: 500px;
 }
+
+.gridline {
+    stroke: #CCCCCC;
+}
+
+.point {
+    fill: #555555;
+    stroke: #111111;
+}
