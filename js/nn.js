@@ -112,11 +112,25 @@ function euclideanSpace(parent) {
 
 }
 
-function dragPoint() {
+function point(x, y, id) {
+    return {
+        x: x,
+        y: y,
+        id: id
+    };
+}
+
+function dragPoint(elem) {
+
+    // We want to be able to call this as a standard event handler, but
+    // we also want to be able to decorate it, so if it's called without
+    // parameters, assume the bound element is `this`
+    bound = typeof elem === "undefined" ? this : elem;
+
     let offsetX = d3.event.dx;
     let offsetY = d3.event.dy;
 
-    let point = d3.select(this);
+    let point = d3.select(bound);
 
     let x = Number(point.attr("cx")) + offsetX;
     let y = Number(point.attr("cy")) + offsetY;
@@ -124,6 +138,7 @@ function dragPoint() {
     maxX = Number(d3.select(".root").attr("width")) - 20;
     maxY = Number(d3.select(".root").attr("height")) - 40;
 
+    // Guard against out-of-bounds
     x = x <= 0 ? 0 : x;
     x = x > maxX ? maxX : x;
     y = y <= 0 ? 0 : y;

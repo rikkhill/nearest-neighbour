@@ -26,3 +26,11 @@ h1, h2 {
     fill: #555555;
     stroke: #111111;
 }
+
+.point.selected {
+    fill: #DD5555;
+}
+
+.point.draggable {
+    fill: #AA5555;
+}

@@ -13,22 +13,44 @@
 <script>
     let tri = euclideanSpace(document.getElementById("triangle"));
 
-    let points = [
-        [5, 4],
-        [4, 5],
-        [6, 4.5]
+    let tri_data = [
+        point(5, 4, "tri1"),
+        point(4, 5, "tri2"),
+        point(6, 4.5, "tri3")
     ];
 
-    tri.svg.selectAll(".point")
-        .data(points)
+    let points = tri.svg.selectAll(".point")
+        .data(tri_data)
         .enter()
         .append("circle")
-        .attr("class", "point")
-        .attr("cx", function(d) { return tri.xScale(d[0]) })
-        .attr("cy", function(d) { return tri.yScale(d[1]) })
-        .attr("r", 5)
-        .call(d3.drag()
-            .on("drag", dragPoint));
+        .attr("class", function(d) { return d.id })
+        .classed("point", true)
+        .attr("cx", function(d) { return tri.xScale(d.x) })
+        .attr("cy", function(d) { return tri.yScale(d.y) })
+        .attr("r", 5);
+
+
+    let tri1 = d3.select(".tri1");
+    let tri2 = d3.select(".tri2");
+    let tri3 = d3.select(".tri3");
+
+    const dragTri = function() {
+        dragPoint(this);
+    }
+
+    tri1.classed("draggable", true)
+            .call(d3.drag()
+            .on("start", function() {
+                d3.select(this).classed("selected", true);
+            })
+            .on("drag", dragTri)
+            .on("end", function() {
+                d3.select(this).classed("selected", false);
+            }));
+
+
+
+
 
 
 
